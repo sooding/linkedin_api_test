@@ -1,8 +1,10 @@
 LinkedinApiTest::Application.routes.draw do
 
+
+  match 'foo' => 'auth#index'
+  match 'bar' => 'auth#callback'
+  
   root :to => 'home#index'
-
-
 
 
 
