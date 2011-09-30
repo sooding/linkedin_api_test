@@ -1,0 +1,6 @@
+---
+:key: 'key1'
+:secret: 'secret'
+:auth_key1: 'auth_key1'
+:auth_key2: 'auth_key2'
+

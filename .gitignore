@@ -5,6 +5,6 @@ tmp/
 .sass-cache/
 
 .rvmrc
-config/oauth_config.yml
+config/oauth.yml
 config/database.yml
 
