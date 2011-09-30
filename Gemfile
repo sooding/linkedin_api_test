@@ -8,6 +8,8 @@ gem 'rails', '3.1.0'
 gem 'mysql2'
 gem 'haml-rails'
 gem 'linkedin'
+gem 'authlogic'
+
 #gem 'oauth-plugin', '>= 0.4.0.pre1'
 
 

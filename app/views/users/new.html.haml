@@ -1,0 +1,8 @@
+%h3
+  Register
+
+= form_for @user, :url => user_path do |f|
+  = render :partial => 'form', :object => f
+  %p
+    = f.submit 'Register'
+
