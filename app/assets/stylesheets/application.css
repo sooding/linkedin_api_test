@@ -3,5 +3,33 @@
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require_self
- *= require_tree . 
+ *= require_tree .
 */
+
+body {
+  margin: 10px auto 30px auto;
+  width: 900px;
+}
+
+#current_user {
+  height: 20px;
+  float: right;
+}
+
+ul.menu {
+  padding-left: 0;
+  list-style-type: none;
+  height: 11px;
+}
+
+ul.menu li {
+  float: left;
+  padding-right: 11px;
+}
+
+hr {
+  clear: both;
+  height: 3px;
+  margin-bottom: 43px;
+}
+

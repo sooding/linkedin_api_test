@@ -1,8 +1,21 @@
 LinkedinApiTest::Application.routes.draw do
 
+  resource :user
+  match 'register' => 'users#new'
+
+  resource :user_session
+  match 'login' => 'user_sessions#new'
+  match 'logout' => 'user_sessions#destroy'
+
+  resources :oauth_consumers do
+    member do
+      get :callback
+      get :callback2
+      match 'client/*endpoint' => 'oauth_consumers#client'
+    end
+  end
+
   root :to => 'home#index'
-
-
 
 
 

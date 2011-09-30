@@ -1,0 +1,17 @@
+%h3
+  Change Password
+
+= form_for @user do |f|
+  %p
+    = f.label :password
+    %br
+    = f.password_field :password
+
+  %p
+    = f.label :password_confirmation
+    %br
+    = f.password_field :password_confirmation
+
+  %p
+    = f.submit 'Update'
+

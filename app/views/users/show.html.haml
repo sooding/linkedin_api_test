@@ -1,0 +1,32 @@
+%h3
+  Profile
+%p
+  Email:
+  = @user.email
+
+%p
+  Login count:
+  = @user.login_count
+
+%p
+  Last request at:
+  = @user.last_request_at
+
+%p
+  Last login at:
+  = @user.last_login_at
+
+%p
+  Current login at:
+  = @user.current_login_at
+
+%p
+  Last login ip:
+  = @user.last_login_ip
+
+%p
+  Current login ip:
+  = @user.current_login_ip
+
+= link_to 'Change Password', edit_user_path
+

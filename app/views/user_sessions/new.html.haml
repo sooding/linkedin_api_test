@@ -1,0 +1,17 @@
+%h3
+  Login
+
+= form_for @user_session, :url => user_session_path do |f|
+  %p
+    = f.label :email
+    %br
+    = f.text_field :email
+
+  %p
+    = f.label :password
+    %br
+    = f.password_field :password
+
+  %p
+    = f.submit 'Login'
+
