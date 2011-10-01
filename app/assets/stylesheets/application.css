@@ -8,7 +8,7 @@
 
 
 body {
-  margin: 10px auto 30px auto;
+  margin: 30px auto 30px auto;
   width: 900px;
 }
 
@@ -30,6 +30,6 @@ ul.menu li {
 
 hr {
   clear: both;
-  height: 3px;
+  margin-top: 17px;
 }
 
