@@ -7,5 +7,5 @@
 %ul
   - current_user.web_services.each do |srv|
     %li
-      =srv.name
+      = link_to srv.name, send("#{srv.name}_path")
 

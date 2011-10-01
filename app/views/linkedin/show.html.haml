@@ -1,0 +1,21 @@
+%h3 LinkedIn
+
+- if @profile
+  .profile_name
+    = @profile.first_name
+    = @profile.last_name
+
+  .profile_title
+    %em
+      = @profile.headline
+
+
+
+
+/- if @connections
+/  %ul
+/    = @connections.all.each do |c|
+/      %li
+/        = c
+
+

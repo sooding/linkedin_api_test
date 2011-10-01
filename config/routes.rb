@@ -1,5 +1,7 @@
 LinkedinApiTest::Application.routes.draw do
 
+  resource :linkedin, :only => :show, :controller => :linkedin
+
   resource :user
   match 'register' => 'users#new'
 
@@ -10,7 +12,7 @@ LinkedinApiTest::Application.routes.draw do
 
   match 'auth/index'
   match 'auth/callback'
-  
+
   root :to => 'home#index'
 
 
