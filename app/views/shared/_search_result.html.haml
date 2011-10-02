@@ -1,0 +1,5 @@
+%tr
+  - attribs.each do |attrib|
+    %td
+      = result.send(attrib.to_sym)
+

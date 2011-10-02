@@ -13,9 +13,17 @@ class LinkedinController < ApplicationController
   end
 
   def show
+    case params[:type]
+    when 'first_name'
+      @search_results = linkedin_client.search(:first_name => params[:q]).people.all
+    when 'last_name'
+      @search_results = linkedin_client.search(:last_name => params[:q]).people.all
+    end
+    @search_headings = @search_results.first.keys if @search_results
+    @search_type_options = { 'First Name' => 'first_name', 'Last Name' => 'last_name' }
+
     if current_user.has_service?(:linkedin)
-      @profile = linkedin_client.profile
-      @connections = linkedin_client.connections
+      get_api_info
     end
   end
 
@@ -28,12 +36,16 @@ class LinkedinController < ApplicationController
     else
       linkedin_connect
     end
-    @profile = linkedin_client.profile
-    @connections = linkedin_client.connections
+    get_api_info
     redirect_to linkedin_path
   end
 
 private
+
+  def get_api_info
+    @profile = Rails.cache.fetch(:profile) { linkedin_client.profile }
+    @connections = Rails.cache.fetch(:connections) { linkedin_client.connections }
+  end
 
   def linkedin_connect
     linkedin_client.authorize_from_access(current_user.get_service_key1(:linkedin), current_user.get_service_key2(:linkedin))

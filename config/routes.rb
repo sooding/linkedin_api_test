@@ -2,7 +2,10 @@ LinkedinApiTest::Application.routes.draw do
 
   WebService::LIST.each do |srv|
     resource srv, :only => [:new, :show], :controller => srv do
-      get 'callback', :on => :member
+      member do
+        get 'callback'
+        #get 'search'
+      end
     end
   end
 

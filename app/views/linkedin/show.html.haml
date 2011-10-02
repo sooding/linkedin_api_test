@@ -8,6 +8,31 @@
   .profile_title
     %em
       = @profile.headline
+%hr
+
+%h4 People Search
+
+= form_tag linkedin_path, :method => :get do
+  = select_tag :type, options_for_select(@search_type_options)
+  = text_field_tag :q
+  = submit_tag 'Search'
+
+
+- if @search_results
+  %hr
+  %h4 Search Results
+  %table{:border => 1}
+    = render 'shared/search_headings', :headings => @search_headings
+    - @search_results.each do |result|
+      = render 'shared/search_result', :result => result, :attribs => @search_headings
+
+
+
+
+
+
+
+
 
 
 
