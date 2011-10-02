@@ -1,12 +1,12 @@
 class LinkedinController < ApplicationController
 
-  def index
+  def new
     if current_user.has_service?(:linkedin)
       linkedin_connect
       redirect_to auth_callback_path
       return
     end
-    request_token = linkedin_client.request_token(:oauth_callback => "http://#{request.host_with_port}/auth/callback")
+    request_token = linkedin_client.request_token(:oauth_callback => callback_linkedin_url)
     session[:rtoken] = request_token.token
     session[:rsecret] = request_token.secret
     redirect_to linkedin_client.request_token.authorize_url
@@ -30,6 +30,7 @@ class LinkedinController < ApplicationController
     end
     @profile = linkedin_client.profile
     @connections = linkedin_client.connections
+    redirect_to linkedin_path
   end
 
 private

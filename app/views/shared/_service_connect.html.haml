@@ -1,0 +1,7 @@
+- if current_user.has_service?(name)
+  = name
+  = link_to '[API]', send("#{name}_path")
+- else
+  = name
+  = link_to '[CONNECT]', send("new_#{name}_path")
+

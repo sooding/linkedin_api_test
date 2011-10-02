@@ -3,9 +3,9 @@
 
 %hr
 
-%h3 Connected Services
+%h3 Services
 %ul
-  - current_user.web_services.each do |srv|
+  - WebService::LIST.each do |srv|
     %li
-      = link_to srv.name, send("#{srv.name}_path")
+      = render 'shared/service_connect', :name => srv
 

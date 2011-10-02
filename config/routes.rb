@@ -1,6 +1,10 @@
 LinkedinApiTest::Application.routes.draw do
 
-  resource :linkedin, :only => :show, :controller => :linkedin
+  WebService::LIST.each do |srv|
+    resource srv, :only => [:new, :show], :controller => srv do
+      get 'callback', :on => :member
+    end
+  end
 
   resource :user
   match 'register' => 'users#new'
@@ -9,9 +13,6 @@ LinkedinApiTest::Application.routes.draw do
   match 'login' => 'user_sessions#new'
   match 'logout' => 'user_sessions#destroy'
 
-
-  match 'auth/index'
-  match 'auth/callback'
 
   root :to => 'home#index'
 
