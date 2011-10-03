@@ -50,7 +50,7 @@ class LinkedinController < ApplicationController
     @company_search_options = { 'Name' => 'name', 'Location' => 'location' }
 
     if current_user.has_service?(:linkedin)
-      get_api_info
+      get_profile_info
     end
   end
 
@@ -63,15 +63,20 @@ class LinkedinController < ApplicationController
     else
       linkedin_connect
     end
-    get_api_info
+    get_profile_info
     redirect_to linkedin_path
   end
 
 private
 
-  def get_api_info
-    @profile = Rails.cache.fetch(:profile) { linkedin_client.profile }
-    @connections = Rails.cache.fetch(:connections) { linkedin_client.connections }
+  def get_profile_info
+    @profile = Rails.cache.fetch(:profile) { linkedin_client.api('people/~:(id,first-name,last-name,headline,picture-url)') }
+    @profile_id = @profile.try(:id)
+    @profile_first_name = @profile.try(:first_name)
+    @profile_last_name = @profile.try(:last_name)
+    @profile_headline = @profile.try(:headline)
+    @profile_avatar = @profile.try(:picture_url)
+    # @connections = Rails.cache.fetch(:connections) { linkedin_client.connections }
   end
 
   def linkedin_connect

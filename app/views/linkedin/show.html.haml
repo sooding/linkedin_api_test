@@ -1,13 +1,15 @@
 %h3 LinkedIn
 
-- if @profile
-  .profile_name
-    = @profile.first_name
-    = @profile.last_name
-
-  .profile_title
-    %em
-      = @profile.headline
+#profile_avatar
+  = image_tag @profile_avatar
+#profile_id
+  = image_tag @profile_id
+#profile_fullname
+  = @profile_first_name
+  = @profile_last_name
+#profile_title
+  %em
+    = @profile_headline
 
 %hr
 %h4 People Search
