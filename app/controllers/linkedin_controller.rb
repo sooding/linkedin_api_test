@@ -24,6 +24,13 @@ class LinkedinController < ApplicationController
       @search_results = linkedin_client.api('company-search', :name => params[:q]).companies.all
     when 'location'
       @search_results = linkedin_client.api('company-search', 'locations:(address:(city))' => params[:q]).companies.all
+    when 'api'
+      @search_results = linkedin_client.api(params[:path], eval(params[:q]))
+      @query = params[:q]
+      @path = params[:path]
+      if @post_process = params[:post_process]
+        eval "@search_results = @search_results.#{params[:post_process]}"
+      end
     end
 
     @search_headings = @search_results.first.keys if @search_results
