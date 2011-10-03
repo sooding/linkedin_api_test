@@ -38,7 +38,13 @@
   %h4 Search Results
   %table{:border => 1}
     = render 'shared/search_headings', :headings => @search_headings
-    - @search_results.each do |result|
-      = render 'shared/search_result', :result => result, :attribs => @search_headings
+    - if @search_results.is_a?(Array)
+      - @search_results.each do |result|
+        = render 'shared/search_result', :result => result, :attribs => @search_headings
+    - else
+      = render 'shared/search_result', :result => @search_results, :attribs => @search_headings
+
+
+
 
 
