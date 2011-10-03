@@ -2,6 +2,11 @@ require 'linked_in/general_api'
 
 class LinkedinController < ApplicationController
 
+  rescue_from LinkedIn::Errors::GeneralError do |exception|
+      flash[:error] = exception.message
+      redirect_to linkedin_path
+  end
+
   def new
     if current_user.has_service?(:linkedin)
       linkedin_connect
@@ -37,7 +42,7 @@ class LinkedinController < ApplicationController
 
     if @search_results.is_a?(Array)
       @search_headings = @search_results.first.keys
-    else
+    elsif @search_results
       @search_headings = @search_results.keys
     end
 

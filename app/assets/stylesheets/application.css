@@ -33,3 +33,12 @@ hr {
   margin-top: 17px;
 }
 
+#flasher #notice {
+  color: green;
+}
+
+#flasher #error {
+  color: red;
+}
+
+
