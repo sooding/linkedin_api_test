@@ -2,7 +2,7 @@ require 'linked_in/general_api'
 
 class LinkedinController < ApplicationController
 
-  rescue_from LinkedIn::Errors::GeneralError do |exception|
+  rescue_from LinkedIn::Errors::GeneralError, NoMethodError do |exception|
       flash[:error] = exception.message
       redirect_to linkedin_path
   end
