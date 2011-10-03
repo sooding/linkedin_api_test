@@ -8,12 +8,18 @@
   .profile_title
     %em
       = @profile.headline
+
 %hr
-
 %h4 People Search
-
 = form_tag linkedin_path, :method => :get do
-  = select_tag :type, options_for_select(@search_type_options)
+  = select_tag :type, options_for_select(@people_search_options)
+  = text_field_tag :q
+  = submit_tag 'Search'
+
+%hr
+%h4 Company Search
+= form_tag linkedin_path, :method => :get do
+  = select_tag :type, options_for_select(@company_search_options)
   = text_field_tag :q
   = submit_tag 'Search'
 
@@ -25,22 +31,5 @@
     = render 'shared/search_headings', :headings => @search_headings
     - @search_results.each do |result|
       = render 'shared/search_result', :result => result, :attribs => @search_headings
-
-
-
-
-
-
-
-
-
-
-
-
-/- if @connections
-/  %ul
-/    = @connections.all.each do |c|
-/      %li
-/        = c
 
 

@@ -1,9 +1,11 @@
+require 'linked_in/company'
+
 class LinkedinController < ApplicationController
 
   def new
     if current_user.has_service?(:linkedin)
       linkedin_connect
-      redirect_to auth_callback_path
+      redirect_to linkedin_path
       return
     end
     request_token = linkedin_client.request_token(:oauth_callback => callback_linkedin_url)
@@ -18,9 +20,15 @@ class LinkedinController < ApplicationController
       @search_results = linkedin_client.search(:first_name => params[:q]).people.all
     when 'last_name'
       @search_results = linkedin_client.search(:last_name => params[:q]).people.all
+    when 'name'
+      @search_results = linkedin_client.csearch(:name => params[:q]).companies.all
+    when 'location'
+      @search_results = linkedin_client.csearch('locations:(address:(city))' => params[:q]).companies.all
     end
+
     @search_headings = @search_results.first.keys if @search_results
-    @search_type_options = { 'First Name' => 'first_name', 'Last Name' => 'last_name' }
+    @people_search_options = { 'First Name' => 'first_name', 'Last Name' => 'last_name' }
+    @company_search_options = { 'Name' => 'name', 'Location' => 'location' }
 
     if current_user.has_service?(:linkedin)
       get_api_info
