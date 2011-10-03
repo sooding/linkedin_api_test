@@ -1,4 +1,4 @@
-require 'linked_in/company'
+require 'linked_in/general_api'
 
 class LinkedinController < ApplicationController
 
@@ -21,9 +21,9 @@ class LinkedinController < ApplicationController
     when 'last_name'
       @search_results = linkedin_client.search(:last_name => params[:q]).people.all
     when 'name'
-      @search_results = linkedin_client.csearch(:name => params[:q]).companies.all
+      @search_results = linkedin_client.api('company-search', :name => params[:q]).companies.all
     when 'location'
-      @search_results = linkedin_client.csearch('locations:(address:(city))' => params[:q]).companies.all
+      @search_results = linkedin_client.api('company-search', 'locations:(address:(city))' => params[:q]).companies.all
     end
 
     @search_headings = @search_results.first.keys if @search_results
