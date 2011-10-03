@@ -1,5 +1,9 @@
 %tr
   - attribs.each do |attrib|
     %td
-      = result.send(attrib.to_sym)
+      - value = result.send(attrib.to_sym)
+      - if value.is_a?(String) && value.starts_with?('http')
+        = image_tag value
+      - else
+        = value
 

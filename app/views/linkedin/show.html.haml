@@ -27,7 +27,6 @@
 %h4 Generic API
 = form_tag linkedin_path, :method => :get do
   = hidden_field_tag 'type', 'api'
-  = text_field_tag :path, @path
   = text_field_tag :q, @query
   = text_field_tag :post_process, @post_process
   = submit_tag 'Search'

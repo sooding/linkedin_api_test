@@ -26,11 +26,10 @@ class LinkedinController < ApplicationController
       @search_results = linkedin_client.api('company-search', 'locations:(address:(city))' => params[:q]).companies.all
     when 'api'
       # TODO: Do this better, cleaner
-      @query = params[:q].blank? ? '{}' : params[:q]
+      @query = params[:q].blank? ? 'people/~' : params[:q]
       @post_process = params[:post_process].blank? ? nil : params[:post_process]
-      @path = params[:path].blank? ? 'people/~' : params[:path]
 
-      @search_results = linkedin_client.api(@path, eval(@query))
+      @search_results = linkedin_client.api(@query)
       if @post_process
         eval "@search_results = @search_results.#{params[:post_process]}"
       end
