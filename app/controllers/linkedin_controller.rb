@@ -2,7 +2,7 @@ require 'linked_in/general_api'
 
 class LinkedinController < ApplicationController
 
-  rescue_from LinkedIn::Errors::GeneralError, NoMethodError do |exception|
+  rescue_from LinkedIn::Errors::GeneralError, NoMethodError, LinkedIn::Errors::NotFoundError do |exception|
       flash[:error] = exception.message
       redirect_to linkedin_path
   end
@@ -26,9 +26,9 @@ class LinkedinController < ApplicationController
     when 'last_name'
       @search_results = linkedin_client.search(:last_name => params[:q]).people.all
     when 'name'
-      @search_results = linkedin_client.api('company-search', :name => params[:q]).companies.all
+      @search_results = linkedin_client.api("companies/universal-name=#{params[:q]}:(id,name,logo-url,description)")
     when 'location'
-      @search_results = linkedin_client.api('company-search', 'locations:(address:(city))' => params[:q]).companies.all
+      @search_results = linkedin_client.api("companies/universal-name=#{params[:q]}")
     when 'api'
       # TODO: Do this better, cleaner
       @query = params[:q].blank? ? 'people/~' : params[:q]
