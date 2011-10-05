@@ -19,6 +19,7 @@ class UserSessionsController < ApplicationController
 
   def destroy
     current_user_session.destroy
+    session[:profile] = nil
     redirect_to root_path
   end
 
